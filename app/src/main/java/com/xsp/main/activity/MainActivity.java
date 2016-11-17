@@ -2,6 +2,7 @@ package com.xsp.main.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.xsp.business02.activity.Business02Activity;
@@ -23,14 +24,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.id_jump_to_business_one:
-                UrlRouter.from(this).jump("activity://native/library");
+                UrlRouter.from(this).requestCode(10).jump("activity://business01/business01");
                 break;
             case R.id.id_jump_to_business_two:
-                startActivity(new Intent(MainActivity.this, Business02Activity.class));
+                UrlRouter.from(this).jump("activity://business02/business02");
                 break;
             default:
                 break;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("xsp", "requestCode :" + requestCode + " ; resultCode = " + resultCode);
+    }
 }
