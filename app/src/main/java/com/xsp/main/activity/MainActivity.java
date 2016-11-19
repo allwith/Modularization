@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.xsp.business02.activity.Business02Activity;
+import com.xsp.library.router.Route;
 import com.xsp.library.router.UrlRouter;
+import com.xsp.library.util.LogUtil;
 import com.xsp.main.R;
 import com.xsp.proxy.activity.BaseActivity;
 
@@ -15,6 +16,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Route startedRoute = UrlRouter.getStartedRoute(this);
+        Route currentRoute = UrlRouter.getCurrentRoute(this);
+        if (null != startedRoute) {
+            LogUtil.e("xsp", "Main:startedRoute:" + startedRoute.toString());
+        }
+
+        if (null != currentRoute) {
+            LogUtil.e("xsp", "Main:currentRoute:" + currentRoute.toString());
+        }
 
         findViewById(R.id.id_jump_to_business_one).setOnClickListener(this);
         findViewById(R.id.id_jump_to_business_two).setOnClickListener(this);

@@ -12,7 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 
 public class UrlRouter {
-    public static final String URL_ROUTER_REFERRER = "UrlRouter.REFERRER";
+    static final String URL_ROUTER_REFERRER = "UrlRouter.REFERRER";
     private Context mContext;
     private Intent mIntent;
     private boolean isAllowEscape;

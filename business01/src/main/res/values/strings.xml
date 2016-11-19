@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Business01</string>
 
+    <string name="one_module_title">这个是第一个业务模块</string>
     <string name="jump_to_main">跳转到主界面</string>
-    <string name="jump_to_self">跳转到自己模块</string>
-    <string name="jump_to_one">跳转到第二个模块</string>
+    <string name="jump_to_self">跳转到自己模块其他页面</string>
+    <string name="jump_to_two">跳转到第二个模块</string>
+
+    <string name="one_module_sub_title">这个是第一个业务模块\n 其他Activity</string>
 </resources>
