@@ -2,19 +2,17 @@
 
 A routing framework support via the url to jump to the Activity!
 
-*	核心原理
-	*	Urlouter
+*	核心原理：Urlouter
 
-*	目的
-	*	1、可取代使用startActivity、startActivityForResult跳转的情景，便于协同开发
-    	*	2、通过一串url可任意跳转到指定界面，使用应尽可能简单
-    	*	3、支持各种类型参数传递、界面转场动画
-    	*	4、可获取起跳界面的路径和当前界面路径，以便支持后期埋点等需求
-    	*	5、支持从H5到Native，Native到H5，这是Hybrid开发模式中常用到的需求
-    	*	6、对于push、浏览器外链跳转等可方便配置化，通过一个url来跳转指定界面
+*	目的：模块解耦
+	*	可取代使用startActivity、startActivityForResult跳转的情景，便于协同开发
+    	*	通过一串url可任意跳转到指定界面，使用应尽可能简单
+    	*	支持各种类型参数传递、界面转场动画
+    	*	可获取起跳界面的路径和当前界面路径，以便支持后期埋点等需求
+    	*	支持从H5到Native，Native到H5，这是Hybrid开发模式中常用到的需求
+    	*	对于push、浏览器外链跳转等可方便配置化，通过一个url来跳转指定界面
 
-*	格式：
-	*	scheme://host/path
+*	格式：scheme://host/path
 	*	scheme：APP内自己定义的，不过这个在H5内跳Native时，需要和前端协商定义好，本地间的跳转可以随自己定义，比如：activity
 	*	host：这个尽可能按各个Activity的所在模块命名
 	*	path：各个Activity的功能名
