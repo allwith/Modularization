@@ -8,7 +8,7 @@ import android.view.View;
 import com.xsp.business02.R;
 import com.xsp.library.router.Route;
 import com.xsp.library.router.UrlRouter;
-import com.xsp.library.util.LogUtil;
+import com.xsp.library.util.ParamsKey;
 import com.xsp.proxy.activity.BaseActivity;
 
 public class Business02Activity extends BaseActivity implements View.OnClickListener {
@@ -21,11 +21,18 @@ public class Business02Activity extends BaseActivity implements View.OnClickList
         Route startedRoute = UrlRouter.getStartedRoute(this);
         Route currentRoute = UrlRouter.getCurrentRoute(this);
         if (null != startedRoute) {
-            LogUtil.e("xsp", "Main:startedRoute:" + startedRoute.toString());
+            Log.e("xsp", "Business02:startedRoute:" + startedRoute.toString());
         }
 
         if (null != currentRoute) {
-            LogUtil.e("xsp", "Main:currentRoute:" + currentRoute.toString());
+            Log.e("xsp", "Business02:currentRoute:" + currentRoute.toString());
+
+            if (null != currentRoute.bundle) {
+                Bundle bundle = currentRoute.bundle;
+                String para01 = bundle.getString(ParamsKey.MAIN_JUMP_TO_BUSINESS01_PARAMS_ONE);
+                int para02 = bundle.getInt(ParamsKey.MAIN_JUMP_TO_BUSINESS02_PARAMS_TWO);
+                Log.e("xsp", para01 + " ; " + para02);
+            }
         }
 
         findViewById(R.id.id_jump_to_main).setOnClickListener(this);

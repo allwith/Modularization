@@ -1,5 +1,6 @@
 package com.xsp.library.router;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,6 +10,7 @@ public final class Route implements Parcelable {
     public String path;
     public String packageName;
     public String activityName;
+    public Bundle bundle;
 
     private Route() {
     }
@@ -25,6 +27,7 @@ public final class Route implements Parcelable {
                 ", host='" + host + '\'' +
                 ", path='" + path + '\'' +
                 ", packageName='" + packageName + '\'' +
+                ", bundle='" + (null != bundle ? bundle.toString() : "") + '\'' +
                 '}';
     }
 

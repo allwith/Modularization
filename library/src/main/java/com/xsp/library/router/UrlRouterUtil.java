@@ -44,6 +44,7 @@ public class UrlRouterUtil {
                 return route;
             route.packageName = resolveInfo.activityInfo.packageName;
             route.activityName = resolveInfo.activityInfo.name;
+            route.bundle = startedIntent.getExtras();
             return route;
         }
         return null;

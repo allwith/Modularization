@@ -22,11 +22,11 @@ public class Business01Activity extends BaseActivity implements View.OnClickList
         Route startedRoute = UrlRouter.getStartedRoute(this);
         Route currentRoute = UrlRouter.getCurrentRoute(this);
         if (null != startedRoute) {
-            LogUtil.e("xsp", "Main:startedRoute:" + startedRoute.toString());
+            LogUtil.e("xsp", "Business01:startedRoute:" + startedRoute.toString());
         }
 
         if (null != currentRoute) {
-            LogUtil.e("xsp", "Main:currentRoute:" + currentRoute.toString());
+            LogUtil.e("xsp", "Business01:currentRoute:" + currentRoute.toString());
         }
 
         findViewById(R.id.id_jump_to_main).setOnClickListener(this);

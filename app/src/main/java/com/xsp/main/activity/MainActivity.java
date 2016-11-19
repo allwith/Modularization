@@ -8,6 +8,7 @@ import android.view.View;
 import com.xsp.library.router.Route;
 import com.xsp.library.router.UrlRouter;
 import com.xsp.library.util.LogUtil;
+import com.xsp.library.util.ParamsKey;
 import com.xsp.main.R;
 import com.xsp.proxy.activity.BaseActivity;
 
@@ -38,7 +39,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 UrlRouter.from(this).requestCode(10).jump("activity://business01/business01");
                 break;
             case R.id.id_jump_to_business_two:
-                UrlRouter.from(this).jump("activity://business02/business02");
+                Bundle bundle = new Bundle();
+                bundle.putString(ParamsKey.MAIN_JUMP_TO_BUSINESS01_PARAMS_ONE, "test01");
+                bundle.putInt(ParamsKey.MAIN_JUMP_TO_BUSINESS02_PARAMS_TWO, 50);
+                UrlRouter.from(this).params(bundle).jump("activity://business02/business02");
                 break;
             default:
                 break;
