@@ -24,7 +24,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':proxy')
-    compile project(':business01')
-    compile project(':business02')
+
+    // 加快编译速度，根据业务需要进行模块编译
+    println IsBuildMudle.toBoolean()
+    if (!IsBuildMudle.toBoolean()) {
+        compile project(':business01')
+        compile project(':business02')
+    } else {
+        compile project(':proxy')
+    }
+
 }

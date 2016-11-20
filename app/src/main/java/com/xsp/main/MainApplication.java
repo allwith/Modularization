@@ -8,4 +8,5 @@ public class MainApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
     }
+
 }

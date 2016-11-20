@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_top"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_top"
         android:gravity="center_horizontal"
         android:text="@string/main_module_title"
         android:textColor="@color/colorAccent"
@@ -18,20 +18,20 @@
         android:id="@+id/id_jump_to_business_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_top"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_top"
         android:text="@string/jump_to_module_one"
         android:textColor="@color/colorAccent"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/id_jump_to_business_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_top"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_top"
         android:text="@string/jump_to_module_two"
         android:textColor="@color/colorAccent"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
 </LinearLayout>

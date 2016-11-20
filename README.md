@@ -2,7 +2,7 @@
 
 A routing framework support via the url to jump to the Activity!
 
-*	核心原理：Urlouter
+*	核心原理：UrlRouter
 
 *	目的：模块解耦
 	*	可取代使用startActivity、startActivityForResult跳转的情景，便于协同开发

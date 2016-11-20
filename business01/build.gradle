@@ -1,4 +1,11 @@
-apply plugin: 'com.android.library'
+// 每个Module都是，Debug时作为 library， Release时作为Application独立运行，提高编译速度；
+println 'Business01Module: ' + IsBuildMudle.toBoolean()
+if (IsBuildMudle.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
 
 android {
     compileSdkVersion 25
@@ -19,6 +26,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // AndroidManifest 设置，一定要记得同步debug和release的信息，否则容易出Bug；
+    sourceSets {
+        main {
+            if (IsBuildMudle.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+            }
+        }
+    }
+    // 当分别开发模块时，容易出资源重复命名的问题, 因此资源添加前缀
+    resourcePrefix "business01_"
 }
 
 dependencies {
