@@ -2,7 +2,6 @@ package com.xsp.business01.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.xsp.business01.R;
@@ -10,6 +9,7 @@ import com.xsp.business01.util.RequestCodeUtil;
 import com.xsp.library.router.Route;
 import com.xsp.library.router.UrlRouter;
 import com.xsp.library.util.LogUtil;
+import com.xsp.library.util.ParamsKey;
 import com.xsp.proxy.activity.BaseActivity;
 
 public class Business01Activity extends BaseActivity implements View.OnClickListener {
@@ -21,12 +21,17 @@ public class Business01Activity extends BaseActivity implements View.OnClickList
 
         Route startedRoute = UrlRouter.getStartedRoute(this);
         Route currentRoute = UrlRouter.getCurrentRoute(this);
-        if (null != startedRoute) {
-            LogUtil.e("xsp", "Business01:startedRoute:" + startedRoute.toString());
-        }
 
-        if (null != currentRoute) {
-            LogUtil.e("xsp", "Business01:currentRoute:" + currentRoute.toString());
+        LogUtil.e("xsp", "Business01:startedRoute:"
+                + (null == startedRoute ? "null == startedRoute" : startedRoute.toString()));
+        LogUtil.e("xsp", "Business01:currentRoute:"
+                + (null == currentRoute ? "null == currentRoute" : currentRoute.toString()));
+
+        if (null != currentRoute && null != currentRoute.bundle) {
+            Bundle bundle = currentRoute.bundle;
+            String para01 = bundle.getString(ParamsKey.MAIN_JUMP_TO_BUSINESS01_PARAMS_ONE);
+            int para02 = bundle.getInt(ParamsKey.MAIN_JUMP_TO_BUSINESS01_PARAMS_TWO);
+            LogUtil.e("xsp", para01 + " ; " + para02);
         }
 
         findViewById(R.id.id_jump_to_main).setOnClickListener(this);
@@ -53,7 +58,7 @@ public class Business01Activity extends BaseActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case RequestCodeUtil.BUSINESS_CODE:
-                Log.d("sam", "Get back requestCode ： " + RequestCodeUtil.BUSINESS_CODE);
+                LogUtil.d("sam", "Get back requestCode ： " + RequestCodeUtil.BUSINESS_CODE);
                 break;
         }
     }

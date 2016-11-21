@@ -21,8 +21,10 @@ public class UrlRouter {
     private int[] mTransitionAnim;
 
     private UrlRouter(Context context) {
-        if (context == null)
+        if (null == context) {
             throw new IllegalArgumentException("context can not be null!");
+        }
+
         this.mContext = context;
         this.isAllowEscape = false;
         this.mRequestCode = -1;
@@ -36,8 +38,9 @@ public class UrlRouter {
     }
 
     public final UrlRouter params(Bundle bundle) {
-        if (bundle == null)
+        if (null == bundle) {
             return this;
+        }
         mIntent.putExtras(bundle);
         return this;
     }
@@ -77,9 +80,11 @@ public class UrlRouter {
         return this;
     }
 
-    public final boolean jump(Uri uri) {
-        if (uri == null)
+    private boolean jump(Uri uri) {
+        if (null == uri) {
             return false;
+        }
+
         if (!isAllowEscape) {
             mIntent.setPackage(mContext.getApplicationContext().getPackageName());
         }
@@ -88,8 +93,9 @@ public class UrlRouter {
         }
         mIntent.setData(uri);
         ResolveInfo targetActivity = UrlRouterUtil.queryActivity(mContext, mIntent);
-        if (targetActivity == null)
+        if (null == targetActivity) {
             return false;
+        }
         String packageName = targetActivity.activityInfo.packageName;
         String className = targetActivity.activityInfo.name;
         mIntent.setClassName(packageName, className);
@@ -101,16 +107,17 @@ public class UrlRouter {
         }
         if (mContext instanceof Activity) {
             ComponentName thisComponentName = ((Activity) mContext).getComponentName();
-            if (thisComponentName.equals(targetComponentName))
+            if (thisComponentName.equals(targetComponentName)) {
                 return true;
+            }
             if (mRequestCode >= 0) {
                 ActivityCompat.startActivityForResult((Activity) mContext, mIntent, mRequestCode, null);
                 return true;
             }
-            ActivityCompat.startActivity((Activity) mContext, mIntent, null);
+            ActivityCompat.startActivity(mContext, mIntent, null);
             return true;
         }
-        if (mTransitionAnim != null) {
+        if (null != mTransitionAnim) {
             ((Activity) mContext).overridePendingTransition(mTransitionAnim[0], mTransitionAnim[1]);
         }
         return false;
@@ -120,7 +127,7 @@ public class UrlRouter {
         return !TextUtils.isEmpty(url) && jumpToMain(Uri.parse(url));
     }
 
-    public final boolean jumpToMain(Uri uri) {
+    private boolean jumpToMain(Uri uri) {
         mIntent.setAction(Intent.ACTION_MAIN);
         mIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         return jump(uri);

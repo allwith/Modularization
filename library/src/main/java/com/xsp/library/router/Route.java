@@ -8,14 +8,16 @@ public final class Route implements Parcelable {
     public String scheme;
     public String host;
     public String path;
-    public String packageName;
-    public String activityName;
     public Bundle bundle;
 
+    String packageName;
+    String activityName;
+
     private Route() {
+
     }
 
-    public static Route newInstance() {
+    static Route newInstance() {
         return new Route();
     }
 
@@ -43,14 +45,16 @@ public final class Route implements Parcelable {
         dest.writeString(this.path);
         dest.writeString(this.packageName);
         dest.writeString(this.activityName);
+        dest.writeBundle(this.bundle);
     }
 
-    protected Route(Parcel in) {
+    private Route(Parcel in) {
         this.scheme = in.readString();
         this.host = in.readString();
         this.path = in.readString();
         this.packageName = in.readString();
         this.activityName = in.readString();
+        this.bundle = in.readBundle(getClass().getClassLoader());
     }
 
     public static final Creator<Route> CREATOR = new Creator<Route>() {

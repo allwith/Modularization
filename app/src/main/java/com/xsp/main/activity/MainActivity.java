@@ -2,7 +2,6 @@ package com.xsp.main.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.xsp.library.router.Route;
@@ -41,7 +40,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.id_jump_to_business_two:
                 Bundle bundle = new Bundle();
                 bundle.putString(ParamsKey.MAIN_JUMP_TO_BUSINESS01_PARAMS_ONE, "test01");
-                bundle.putInt(ParamsKey.MAIN_JUMP_TO_BUSINESS02_PARAMS_TWO, 50);
+                bundle.putInt(ParamsKey.MAIN_JUMP_TO_BUSINESS01_PARAMS_TWO, 50);
                 UrlRouter.from(this).params(bundle).jump("activity://business02/business02");
                 break;
             default:
@@ -52,6 +51,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("xsp", "requestCode :" + requestCode + " ; resultCode = " + resultCode);
+        LogUtil.d("xsp", "requestCode :" + requestCode + " ; resultCode = " + resultCode);
     }
 }

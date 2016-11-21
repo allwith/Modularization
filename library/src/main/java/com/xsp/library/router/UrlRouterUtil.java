@@ -10,17 +10,17 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-public class UrlRouterUtil {
+class UrlRouterUtil {
 
-    public static void setupReferrer(Context context, Intent intent) {
-        if (context != null && context instanceof Activity) {
+    static void setupReferrer(Context context, Intent intent) {
+        if (null != context && context instanceof Activity) {
             Route currentRoute = parseCurrentRoute(context);
             intent.putExtra(UrlRouter.URL_ROUTER_REFERRER, currentRoute);
         }
     }
 
-    public static Route parseStartedRoute(Context context) {
-        if (context != null && context instanceof Activity) {
+    static Route parseStartedRoute(Context context) {
+        if (null != context && context instanceof Activity) {
             Intent startedIntent = ((Activity) context).getIntent();
             if (startedIntent.hasExtra(UrlRouter.URL_ROUTER_REFERRER)) {
                 return startedIntent.getParcelableExtra(UrlRouter.URL_ROUTER_REFERRER);
@@ -29,44 +29,54 @@ public class UrlRouterUtil {
         return null;
     }
 
-    public static Route parseCurrentRoute(Context context) {
-        if (context != null && context instanceof Activity) {
-            Route route = Route.newInstance();
+    static Route parseCurrentRoute(Context context) {
+        if (null != context && context instanceof Activity) {
             Intent startedIntent = ((Activity) context).getIntent();
             Uri uri = startedIntent.getData();
-            if (uri == null)
+            if (null == uri) {
                 return null;
-            route.scheme = UrlRouterUtil.getScheme(uri);
-            route.host = UrlRouterUtil.getHost(uri);
-            route.path = UrlRouterUtil.getPath(uri);
-            ResolveInfo resolveInfo = UrlRouterUtil.queryActivity(context, startedIntent);
-            if (resolveInfo == null)
+            }
+
+            Route route = Route.newInstance();
+            route.scheme = getScheme(uri);
+            route.host = getHost(uri);
+            route.path = getPath(uri);
+            route.bundle = startedIntent.getExtras();
+            ResolveInfo resolveInfo = queryActivity(context, startedIntent);
+            if (null == resolveInfo) {
                 return route;
+            }
+
             route.packageName = resolveInfo.activityInfo.packageName;
             route.activityName = resolveInfo.activityInfo.name;
-            route.bundle = startedIntent.getExtras();
             return route;
         }
         return null;
     }
 
-    public static ResolveInfo queryActivity(Context context, Intent intent) {
-        if (context == null || intent == null)
+    static ResolveInfo queryActivity(Context context, Intent intent) {
+        if (null == context || null == intent) {
             return null;
+        }
+
         PackageManager packageManager = context.getApplicationContext().getPackageManager();
+        // 返回满足action和category 的所有ResolveInfo对象(本质上是Activity)，集合对象
         List<ResolveInfo> resolveInfoList = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
-        if (resolveInfoList == null || resolveInfoList.size() == 0)
+        if (null == resolveInfoList || resolveInfoList.size() == 0) {
             return null;
+        }
+
         int size = resolveInfoList.size();
-        if (size == 1)
+        if (size == 1) {
             return resolveInfoList.get(0);
+        }
         String appPackageName = context.getApplicationContext().getPackageName();
-        for (int i = 0; i < size; i++) {
-            ResolveInfo resolveInfo = resolveInfoList.get(i);
+        for (ResolveInfo resolveInfo : resolveInfoList) {
             String activityName = resolveInfo.activityInfo.name;
-            if (TextUtils.isEmpty(activityName))
+            if (TextUtils.isEmpty(activityName)) {
                 continue;
+            }
             if (activityName.startsWith(appPackageName)) {
                 return resolveInfo;
             }
@@ -74,24 +84,28 @@ public class UrlRouterUtil {
         return resolveInfoList.get(0);
     }
 
-    public static String getScheme(Uri uri) {
-        if (uri == null)
+    private static String getScheme(Uri uri) {
+        if (null == uri) {
             return null;
+        }
         return uri.getScheme();
     }
 
-    public static String getHost(Uri uri) {
-        if (uri == null)
+    private static String getHost(Uri uri) {
+        if (null == uri) {
             return null;
+        }
         return uri.getHost();
     }
 
-    public static String getPath(Uri uri) {
-        if (uri == null)
+    private static String getPath(Uri uri) {
+        if (null == uri) {
             return null;
+        }
         String path = uri.getPath();
-        if (TextUtils.isEmpty(path))
+        if (TextUtils.isEmpty(path)) {
             return null;
+        }
         path = path.replace("/", "");
         return path;
     }
